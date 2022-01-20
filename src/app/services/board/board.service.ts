@@ -104,6 +104,7 @@ export class BoardService {
     //  n stands for the size of the board, n = 3 for the current game.
     let boardSize: number = 3;
 
+    // Method returns if moves are not sufficient
     if (this.moves.length <= boardSize * 2 - 2)
       return "Pending";
 

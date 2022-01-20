@@ -102,11 +102,15 @@ export class BoardService {
     this.updateMoves(index);
 
     //  n stands for the size of the board, n = 3 for the current game.
-    let n: number = 3;
+    let boardSize: number = 3;
+
+    if (this.moves.length <= boardSize * 2 - 2)
+      return "Pending";
+
     //  Use rows and cols to record the value on each row and each column.
     //  diag1 and diag2 to record value on diagonal or anti-diagonal.
-    let cols: number[] = new Array(n).fill(0);
-    let rows: number[] = new Array(n).fill(0);
+    let cols: number[] = new Array(boardSize).fill(0);
+    let rows: number[] = new Array(boardSize).fill(0);
     let anti_diag: number = 0;
     let diag: number = 0;
     //  Two players having value of 1 and -1, player_1 with value = 1 places first.
@@ -124,28 +128,28 @@ export class BoardService {
         diag = (diag + player);
       }
 
-      if (((row + col) == (n - 1))) {
+      if (((row + col) == (boardSize - 1))) {
         anti_diag = (anti_diag + player);
       }
 
       //  Check if this move meets any of the winning conditions.
-      if (Math.abs(rows[row]) == n) {
+      if (Math.abs(rows[row]) == boardSize) {
         // If rows are matchings, then update the rows to Win
-        this.updateRowWinStatus(row, n);
+        this.updateRowWinStatus(row, boardSize);
         return player == 1 ? "X" : "O";
-      } else if (Math.abs(cols[col]) == n) {
+      } else if (Math.abs(cols[col]) == boardSize) {
         // If columns are matchings, then update the columns to Win
-        this.updateColWinStatus(col, n);
+        this.updateColWinStatus(col, boardSize);
         return player == 1 ? "X" : "O";
       }
-      else if (Math.abs(diag) == n) {
+      else if (Math.abs(diag) == boardSize) {
         // If diagonal are matchings, then update the squares to Win
-        this.updateDiagWinStatus(n);
+        this.updateDiagWinStatus(boardSize);
         return player == 1 ? "X" : "O";
       }
-      else if (Math.abs(anti_diag) == n) {
+      else if (Math.abs(anti_diag) == boardSize) {
         // If anti-diagonal are matchings, then update the squares to Win
-        this.updateAntiDiagWinStatus(n);
+        this.updateAntiDiagWinStatus(boardSize);
         return player == 1 ? "X" : "O";
       }
 
@@ -156,7 +160,7 @@ export class BoardService {
 
     //  If all moves are completed and there is still no result, we shall check if
     //  the grid is full or not. If so, the game ends with draw, otherwise pending.
-    return this.moves.length == n * n ? "Draw" : "Pending";
+    return this.moves.length == boardSize * boardSize ? "Draw" : "Pending";
 
   }
 

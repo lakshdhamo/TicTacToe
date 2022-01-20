@@ -1,0 +1,44 @@
+<div
+     class="game-ui"
+     fxLayout="row wrap"
+     fxLayoutAlign="start center"
+     fxLayoutAlign.lt-md="center center"
+      fxLayoutGap="20px"
+     >
+  <div class="game-info" fxFlex="1 1 50%">
+    <h1 class="title">Tic-Tac-Toe</h1>
+    <h4 *ngIf="!winner && !isDraw" class="subtitle">
+      Player
+      <span [ngClass]="{
+          'player-x': playerMarker === 'X',
+          'player-o': playerMarker === 'O'
+        }">{{ playerMarker }}</span>'s Turn
+    </h4>
+    <h4 *ngIf="winner" class="subtitle">
+      Player
+      <span [ngClass]="{
+          'player-x': winner === 'X',
+          'player-o': winner === 'O'
+        }">{{ winner }}</span>
+      won the game!
+    </h4>
+    <h4 *ngIf="isDraw" class="subtitle">It is a tie!</h4>
+    <button mat-flat-button (click)="newGame()" class="ng-btn">
+      New Game
+    </button>
+    <button mat-flat-button (click)="undo()" [disabled]="boardService.disableUndo" class="ng-btn">
+      Undo
+    </button>
+    <button mat-flat-button (click)="redo()" [disabled]="boardService.disableRedo" class="ng-btn">
+      Redo
+    </button>
+  </div>
+
+  <div class="game-board">
+    <main>
+      <app-square *ngFor="let val of boardService.squares; let i = index" [value]="val" [disabled]="disable"
+        (click)="action(i)"></app-square>
+    </main>
+    <app-scoresheet></app-scoresheet>
+  </div>
+</div>

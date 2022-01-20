@@ -1,0 +1,56 @@
+main {
+  display: grid;
+  grid-template-columns: repeat(3, 12rem);
+}
+
+app-square {
+  height: 12rem;
+}
+
+.title {
+  color: rgb(15, 14, 14);
+  font-weight: 600;
+  font-size: 6rem;
+  padding: 3rem 0 0 0;
+  @media only screen and (max-width: 45em) {
+    font-size: 5rem;
+    padding: 1.5rem 0;
+  }
+}
+
+.subtitle {
+  color: rgb(10, 10, 10);
+  font-weight: 400;
+  font-size: 4rem;
+  padding: 2rem 0 3rem 0;
+  @media only screen and (max-width: 45em) {
+    font-size: 2.6rem;
+  }
+}
+
+button {
+  margin: 2rem;
+  background-color: #534f5f;
+  color: #fff;
+  @media only screen and (max-width: 45em) {
+    margin: 0 1rem 4rem 1rem;
+    font-size: 1.5rem;
+  }
+}
+
+.game-ui {
+  background: #fcf9f9;
+  padding: 5rem;
+  height: 100%;
+  text-align: center;
+}
+
+.player-x {
+  font-weight: 550;
+  color: "black";
+}
+
+.player-o {
+  font-weight: 750;
+  color: #ff3d71;
+}

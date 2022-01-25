@@ -1,9 +1,8 @@
-import { UpdateSquare, ResetSquare, UndoSquare, RedoSquare } from './../actions/square.action';
-import { Square } from "../../square/square";
 import { Injectable } from '@angular/core';
-import { State, Selector, Action, StateContext } from '@ngxs/store';
+import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { map, Observable, of } from 'rxjs';
 import { SquareStateModel } from '../model/square.state.model';
+import { RedoSquare, ResetSquare, UndoSquare, UpdateSquare } from './../actions/square.action';
 
 @State<SquareStateModel>({
   name: 'Squares',

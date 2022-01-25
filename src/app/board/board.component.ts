@@ -1,10 +1,10 @@
-import { Square } from './../square/square';
-import { ResetSquare, UpdateSquare, UndoSquare, RedoSquare } from './../store/actions/square.action';
 import { Component, OnInit } from "@angular/core";
-import { ScoreSheet } from "../scoresheet/ScoreSheet";
-import { ScoreService } from "../services/score/score.service";
-import { BoardService } from "../services/board/board.service";
 import { Store } from '@ngxs/store';
+import { ScoreSheet } from "../scoresheet/ScoreSheet";
+import { BoardService } from "../services/board/board.service";
+import { ScoreService } from "../services/score/score.service";
+import { SquareStateModel } from "../store/model/square.state.model";
+import { RedoSquare, ResetSquare, UndoSquare, UpdateSquare } from './../store/actions/square.action';
 
 @Component({
   selector: "app-board",
@@ -72,7 +72,13 @@ export class BoardComponent implements OnInit {
   redo() {
     this.store.dispatch(new RedoSquare());
     this.playerTurn = !this.playerTurn;
-    this.boardService.updateMoves(this.boardService.lastAction.index);
+
+    // Gets the last action and find the Index of it.
+    const state = this.store.selectSnapshot<any>((state: SquareStateModel) => state);
+    let index = state.Squares.actions.slice(-1)[0].index
+
+    // Make the move
+    this.boardService.updateMoves(index);
   }
 
   // Checks winning status

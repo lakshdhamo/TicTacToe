@@ -1,16 +1,15 @@
 import { Injectable } from "@angular/core";
-import { Square } from "src/app/square/square";
-import { Select, Store, Action } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { Observable } from "rxjs";
-import { SquareState } from "src/app/store/states/square.state";
+import { Square } from "src/app/square/square";
 import { UpdateSquare } from "src/app/store/actions/square.action";
+import { SquareState } from "src/app/store/states/square.state";
 
 @Injectable({
   providedIn: "root"
 })
 export class BoardService {
   squares!: Square[];
-  lastAction!: Square;
   disableUndo!: boolean;
   disableRedo!: boolean;
   moves: number[][] = [];
@@ -28,7 +27,6 @@ export class BoardService {
     this.hasActions.subscribe(
       (data) => {
         this.disableUndo = data.length > 0 ? false : true;
-        this.lastAction = data.slice(-1)[0];
       }
     );
 
@@ -39,7 +37,7 @@ export class BoardService {
       }
     );
   }
-
+  // token.Squares.actions.slice(-1)[0].index
   // Generate move from Index and update the moves
   updateMoves(index: number): void {
     var row = Math.floor(index / 3);

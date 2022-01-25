@@ -14,24 +14,24 @@ export class BoardService {
   disableRedo!: boolean;
   moves: number[][] = [];
 
-  @Select(SquareState.getSquareList) squareList!: Observable<Square[]>;
-  @Select(SquareState.getActionList) hasActions!: Observable<Square[]>;
-  @Select(SquareState.getUndoList) hasUndoActions!: Observable<Square[]>;
+  @Select(SquareState.getSquareList) squareList$!: Observable<Square[]>;
+  @Select(SquareState.getActionList) hasActions$!: Observable<Square[]>;
+  @Select(SquareState.getUndoList) hasUndoActions$!: Observable<Square[]>;
 
   constructor(private store: Store) {
-    this.squareList.subscribe(
+    this.squareList$.subscribe(
       (data) => this.squares = data
     );
 
     // Action selector subscribtion
-    this.hasActions.subscribe(
+    this.hasActions$.subscribe(
       (data) => {
         this.disableUndo = data.length > 0 ? false : true;
       }
     );
 
     // Undo Action selector subscribtion
-    this.hasUndoActions.subscribe(
+    this.hasUndoActions$.subscribe(
       (data) => {
         this.disableRedo = data.length > 0 ? false : true;
       }

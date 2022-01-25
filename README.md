@@ -17,6 +17,11 @@ npm install -g @angular/cli
 6. Command to Build: Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. 
 7. Command to Run: Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
+## Running unit tests
+Written unit tests using Jasmine & Karma to test the State Management.
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
 ## NGXS?
 Used NGXS library for **state management**. NGXS is a state management pattern + library for Angular. It acts as a single source of truth for your application's state, providing simple rules for predictable state mutations.
 

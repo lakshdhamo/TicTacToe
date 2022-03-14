@@ -9,7 +9,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 npm install -g typescript
 ```
 3. Navigate to project folder
-4. Install Angular CLI Globally
+4. Install Angular CLI Globally:
  ```bash
 npm install -g @angular/cli
 ```
